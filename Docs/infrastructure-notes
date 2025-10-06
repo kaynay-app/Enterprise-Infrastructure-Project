@@ -1,1 +1,76 @@
+## 🧠 Active Directory & Domain Services
 
+- `KLM-DC01`: Primary domain controller  
+  - Provides **iSCSI shared storage** via MS iSCSI Target  
+  - Hosts **DNS** services  
+
+- `KLM-DC02`: Secondary DC  
+  - Runs **Windows Server Update Services (WSUS)**  
+  - DNS server for fault tolerance  
+
+- `KLM-DC03`: Tertiary DC  
+  - Provides **additional DNS & AD** services  
+
+All components are part of the domain.
+
+---
+
+## 📦 vCenter & ESXi
+
+- vCenter (KLMVCENTER01) and all ESXi hosts are **domain joined**
+- Hosts were **upgraded** to ESXi 7.0U3s with manual .zip depot file and installed with SSH shell 
+- **Cold migration** used as fallback when vMotion failed
+- vMotion issues resolved by aligning **network policies** across vSwitches
+
+---
+
+## 🛎️ Monitoring & Alerting
+
+- Custom **PowerShell scripts** monitor VM power states
+- If a VM is **down or unresponsive**, a script triggers:
+  - An alert via **SMTP email**
+
+---
+
+## 🔄 VM Migration Example
+
+VMs (including vCenter) were tested for:
+
+- Live migration (vMotion) between upgraded hosts
+- Cold migration fallback when vMotion failed
+- Networking compatibility issues across ESXi hosts
+- DNS resolution post-migration
+
+---
+
+## 🛠 Troubleshooting Highlights
+
+- Resolved low memory issues (`stagebootbank` ramdisk)
+- Addressed failed `lwsmd` process after upgrade
+- Manually powered off VMs from CLI when unresponsive
+- Re-registered VMs using `vim-cmd` after migration failures
+- Updated CPU core settings to bypass ESXi hardware warnings in nested home lab
+- Addressed missing uplink for vMotion automatic HA on hosts 
+
+---
+
+## 💡 Why This Project?
+
+To simulate a **production-grade private cloud lab**, replicating enterprise-level systems for:
+
+- Design and building of Enterprise cloud environment
+- Disaster recovery testing  
+- Infrastructure automation  
+- Host patching and upgrade paths  
+- AD-integrated VMware infrastructure  
+- Hands-on experience with core IT systems
+
+---
+
+## 📝 Status
+
+✅ Fully functional & documented  
+🔄 Upcoming Plans:
+- Deploy Linux and Windows workload VMs for AAG clusters to mirror databases
+
+---
