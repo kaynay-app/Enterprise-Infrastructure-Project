@@ -32,17 +32,6 @@ All components are part of the domain.
 
 ---
 
-## 🔄 VM Migration Example
-
-VMs (including vCenter) were tested for:
-
-- Live migration (vMotion) between upgraded hosts
-- Cold migration fallback when vMotion failed
-- Networking compatibility issues across ESXi hosts
-- DNS resolution post-migration
-
----
-
 ## 🛠 Troubleshooting Highlights
 
 - Resolved low memory issues (`stagebootbank` ramdisk)
