@@ -32,17 +32,6 @@ All components are part of the domain.
 
 ---
 
-## 🛠 Troubleshooting Highlights
-
-- Resolved low memory issues (`stagebootbank` ramdisk)
-- Addressed failed `lwsmd` process after upgrade
-- Manually powered off VMs from CLI when unresponsive
-- Re-registered VMs using `vim-cmd` after migration failures
-- Updated CPU core settings to bypass ESXi hardware warnings in nested home lab
-- Addressed missing uplink for vMotion automatic HA on hosts 
-
----
-
 ## 💡 Why This Project?
 
 To simulate a **production-grade private cloud lab**, replicating enterprise-level systems for:
