@@ -1,1 +1,22 @@
++----------------------------+
+| VMware Workstation |
++----------------------------+
+| | |
++-----+ +---+--+ +-+-----+
+| ESXi | | ESXi | | ESXi |
+| 01 | | 02 | | 03 |
++--+---+ +--+---+ +--+---+
+| | |
++--- Shared iSCSI Storage (KLM-DC01)
+|
++------------------------------+
+| Active Directory Domain (KLM)|
+| - KLM-DC01: iSCSI, DNS |
+| - KLM-DC02: WSUS, DNS |
+| - KLM-DC03: DNS, AD DS |
++------------------------------+
 
++-----------------------------+
+| vCenter Server (KLMVCENTER01) |
+| Domain-joined (klm.king.klm) |
++-----------------------------+
