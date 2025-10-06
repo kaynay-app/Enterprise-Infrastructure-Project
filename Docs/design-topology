@@ -3,14 +3,14 @@
 +----------------------------+
 | | |
 +-----+ +---+--+ +-+-----+
-| ESXi | | ESXi | | ESXi |
+| ESXi (KLMESX01)| | ESXi (KLMESX02)| | ESXi (KLMESX03)|
 | 01 | | 02 | | 03 |
 +--+---+ +--+---+ +--+---+
 | | |
 +--- Shared iSCSI Storage (KLM-DC01)
 |
 +------------------------------+
-| Active Directory Domain (KLM)|
+| Active Directory Local Domain (KLM)|
 | - KLM-DC01: iSCSI, DNS |
 | - KLM-DC02: WSUS, DNS |
 | - KLM-DC03: DNS, AD DS |
@@ -19,4 +19,15 @@
 +-----------------------------+
 | vCenter Server (KLMVCENTER01) |
 | Domain-joined (klm.king.klm) |
+|Centralized AD Managed Accounts and Permissions|  
 +-----------------------------+
+|
++-------------------------------+
+| - NMAP VULNERABILITY SCAN and HOST Detection|
+| - Bitdefender Thread Detection|
+| - Microsoft Defender Threats and Vulnerability Protection|
++-------------------------------+
+|
++-------------------------------+
+| - Snapshot and Local backup for Disaster Recovery|
++-------------------------------+
