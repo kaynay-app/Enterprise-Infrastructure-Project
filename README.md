@@ -1,7 +1,7 @@
 # Enterprise-Infrastructure-Project
 Cloud/On-premise enterprise virtual environment infrastructure project with High Availability features
 
-# 🏗️ Private Cloud Infrastructure Lab (On-Prem / Virtual)
+# 🏗️ Private Cloud Infrastructure Lab (On-Prem /Cloud Virtual)
 
 This project documents the **planning, build, and upgrade of a complete VMware-based on-premises virtual datacenter**, built using VMware Workstation as the foundation. It includes domain controllers, DNS, WSUS, iSCSI shared storage, domain-joined ESXi hosts and vCenter, and PowerShell-based VM alerting.
 
