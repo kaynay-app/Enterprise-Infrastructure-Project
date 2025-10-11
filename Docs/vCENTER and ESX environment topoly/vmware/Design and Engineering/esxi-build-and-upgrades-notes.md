@@ -1,4 +1,4 @@
--Host upgraded from ESXi 7.0.0	ESXi 7.0 GA	2020/04/02	15843807 to ESXi 7.0.3 EP13	ESXi 7.0 Update 3s	2025/03/04	24585291	
+- Host upgraded from ESXi 7.0.0	ESXi 7.0 GA	2020/04/02	15843807 to ESXi 7.0.3 EP13	ESXi 7.0 Update 3s	2025/03/04	24585291	
 
 - Patch manually with .zip image depot file due to Lifecycle Manager update token links for eval  licenses limitations
 
