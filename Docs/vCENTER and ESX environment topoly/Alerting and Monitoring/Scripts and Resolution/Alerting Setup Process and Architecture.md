@@ -25,6 +25,7 @@ http://<Kali_vm_IP>:3001
 
 - Created a new management account and setup your monitoring dashboard for your instaces and alerting groups
 - Added monitors and their alerting type and threshold (ESXi hosts, vCenter, DCs, Gateway, Workstations)
+- Set up Email notifications with google mail smtp server and tested alerts.  
 
 **NOTE for Kali:**
 - If you use Docker, you don’t need any extra dependencies such as Node.js.
