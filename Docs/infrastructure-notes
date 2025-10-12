@@ -26,7 +26,8 @@ All components are part of the domain.
 
 ## 🛎️ Monitoring & Alerting
 
-- Custom **PowerShell scripts** monitor VM power states
+- KLM-MONITOR01 linux vm with Uptime Kuma monitoring tool to alert on ping loss and host status
+- Future custom **PowerShell scripts** monitor VM power states
 - If a VM is **down or unresponsive**, a script triggers:
   - An alert via **SMTP email**
 
