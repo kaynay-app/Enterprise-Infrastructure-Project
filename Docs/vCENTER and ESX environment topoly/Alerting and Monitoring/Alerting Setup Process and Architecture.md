@@ -4,12 +4,14 @@
 -- CPU Core(s): 1
 -- Hard Disk(SCSI): 30GB
 
---------MONITORING TOOLS AND SETUP--------
--Tool: Uptime Kuma
--Alert Instance: ICMP ping
--Escalations: Email listed contact on file via gmail smtp relay messages
++----MONITORING TOOLS AND SETUP----+
+
+- Tool: Uptime Kuma
+- Alert Instance: ICMP ping
+- Escalations: Email listed contact on file via gmail smtp relay messages
 
 +----Docker and Uptime Kuma Setup and Install----+
+
 First, we will install Uptime Kuma systems monitoring tool via docker. This keeps the servuce up to date and makes the startup automatic on boot. To install docker, run the following commands:
 
 sudo apt update
