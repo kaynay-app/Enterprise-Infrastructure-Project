@@ -32,3 +32,6 @@ http://<Kali_vm_IP>:3001
 - Make sure  port 3001 is allwed on your Kali VM’s firewall.
 - You should be able to access the monitoring dashboard from any device in your LAN.
 
+**WORKS CITED:**
+- https://www.kali.org/docs/containers/installing-docker-on-kali/
+
