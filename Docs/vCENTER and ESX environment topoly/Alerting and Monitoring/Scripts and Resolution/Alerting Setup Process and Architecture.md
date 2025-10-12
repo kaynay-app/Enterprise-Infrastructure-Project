@@ -23,10 +23,11 @@ sudo docker run -d --restart=always -p 3001:3001 --name uptime-kuma louislam/upt
 - Once the install is successful, open a web browser and goto the url of your kali linux vm at port 3001.ex:
 http://<Kali_vm_IP>:3001
 
-- Create a new management account and setup your monitoring dashboard for your instaces and alerting groups
+- Created a new management account and setup your monitoring dashboard for your instaces and alerting groups
+- Added monitors and their alerting type and threshold (ESXi hosts, vCenter, DCs, Gateway, Workstations)
 
 **NOTE for Kali:**
-- If you use Docker, you don’t need any extra dependencies.
+- If you use Docker, you don’t need any extra dependencies such as Node.js.
 - Make sure  port 3001 is allwed on your Kali VM’s firewall.
 - You should be able to access the monitoring dashboard from any device in your LAN.
 
