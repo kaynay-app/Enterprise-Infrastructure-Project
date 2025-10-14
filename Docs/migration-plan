@@ -6,5 +6,3 @@ VMs (including vCenter Server and Cluster containers) were tested for:
 - Cold migration fallback when vMotion failed
 - Networking compatibility issues across ESXi hosts
 - DNS resolution post-migration
-
----
