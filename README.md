@@ -27,13 +27,20 @@ The lab simulates a **resilient private cloud environment** and is used to test 
 
 - VMware ESXi 7.0U3s (nested in VMware Workstation)
 - vCenter Server Appliance (VCSA)
-- Windows Server 2019 / 2022
+- Windows Server 2016/ 2019 / 2022/ 2025
+- Win10_22H2_English_x64
+- Win11_24H2_English_x64
+- Kali Linux
+- Kuma Uptime
+- SMTP Messaging Alerting
 - Active Directory Domain Services (ADDS)
 - DNS, WSUS (KLM-DC02), iSCSI Target (KLM-DC01)
 - iSCSI Shared Storage (MS iSCSI Target on Server)
 - PowerShell (monitoring & alerting scripts)
 - SMTP (email alerting for VM outages)
 - VMware Workstation Pro
+- VMware-VMvisor-Installer-7.0.x
+- VMware-VCSA-all-7.0.x
 - GitHub (project documentation)
 
 ---
