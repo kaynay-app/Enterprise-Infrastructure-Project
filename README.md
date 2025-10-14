@@ -33,6 +33,7 @@ The lab simulates a **resilient private cloud environment** and is used to test 
 - Kali Linux
 - Kuma Uptime
 - SMTP Messaging Alerting
+- Nmap - Zenmap GUI
 - Active Directory Domain Services (ADDS)
 - DNS, WSUS (KLM-DC02), iSCSI Target (KLM-DC01)
 - iSCSI Shared Storage (MS iSCSI Target on Server)
