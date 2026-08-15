@@ -32,6 +32,7 @@ The lab simulates a **resilient private cloud environment** and is used to test 
 - Win11_24H2_English_x64
 - Kali Linux
 - Kuma Uptime
+- PFsense NetGate
 - SMTP Messaging Alerting
 - Nmap - Zenmap GUI
 - Active Directory Domain Services (ADDS)
