@@ -20,8 +20,8 @@ The lab contains multiple ESXi hosts with different hardware generations and ESX
 |---|---|---|---|
 | KLMESX01 | 7.0.3 | Connected | 4 CPU / 12 GB RAM |
 | KLMESX02 | 6.5.0 | Connected | 4 CPU / 12 GB RAM |
-| KLMESX03 | Unknown while disconnected | Not Responding | 2 CPU / 4 GB RAM |
-| KLMESX04 | Unknown while disconnected | Not Responding | 2 CPU / 4 GB RAM |
+| KLMESX03 | 7.0.3 | Offline | 2 CPU / 4 GB RAM |
+| KLMESX04 | 7.0.3 | Offline | 2 CPU / 4 GB RAM |
 
 The environment is primarily a **lab / test environment**, rather than a production workload.
 
