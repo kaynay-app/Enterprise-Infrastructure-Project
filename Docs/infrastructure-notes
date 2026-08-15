@@ -1,55 +1,302 @@
 ## 🧠 Active Directory & Domain Services
 
-- `KLM-DC01`: Primary domain controller  
-  - Provides **iSCSI shared storage** via MS iSCSI Target  
-  - Hosts **DNS** services  
+The lab uses a Windows Active Directory domain to provide centralized identity and core infrastructure services.
 
-- `KLM-DC02`: Secondary DC  
-  - Runs **Windows Server Update Services (WSUS)**  
-  - DNS server for fault tolerance  
+### Domain Controllers
 
-- `KLM-DC03`: Tertiary DC  
-  - Provides **additional DNS & AD** services  
+- `KLM-DC01`
+  - Primary domain controller
+  - Provides **DNS**
+  - Provides **iSCSI shared storage** using Microsoft iSCSI Target
 
-All components are part of the domain.
+- `KLM-DC02`
+  - Secondary domain controller
+  - Provides **DNS**
+  - Hosts **Windows Server Update Services (WSUS)**
+
+- `KLM-DC03`
+  - Additional domain controller
+  - Provides **Active Directory Domain Services (AD DS)**
+  - Provides additional **DNS** services
+
+The domain controllers provide the foundation for centralized authentication, DNS resolution, infrastructure management, and Windows-based services throughout the lab.
+
+> No IP addresses or other network addressing information is included in this documentation.
 
 ---
 
-## 📦 vCenter & ESXi
+## 📦 vCenter & ESXi Infrastructure
 
-- vCenter (KLMVCENTER01) and all ESXi hosts are **domain joined**
-- Hosts were **upgraded** to ESXi 7.0U3s with manual .zip depot file and installed with SSH shell 
-- **Cold migration** used as fallback when vMotion failed
-- vMotion issues resolved by aligning **network policies** across vSwitches
+The VMware environment is managed centrally through:
+
+- **vCenter Server:** `KLMVCENTER01`
+- **vCenter FQDN:** `klmvcenter01.king.klm`
+
+The current vSphere inventory contains multiple ESXi hosts with different hardware generations and ESXi versions.
+
+### Active ESXi Hosts
+
+- `KLMESX01`
+  - ESXi 7.0.3
+  - 4 vCPUs / 12 GB host memory
+  - Currently connected and powered on
+
+- `KLMESX02`
+  - ESXi 6.5.0
+  - 4 vCPUs / 12 GB host memory
+  - Currently connected and powered on
+
+### Previously Configured / Unavailable Hosts
+
+- `KLMESX03`
+  - 2 vCPUs / 4 GB host memory
+  - Currently reported as **Not Responding**
+
+- `KLMESX04`
+  - 2 vCPUs / 4 GB host memory
+  - Currently reported as **Not Responding**
+
+The unavailable hosts and their associated test workloads are treated as **non-critical lab infrastructure**.
+
+---
+
+## 🏢 vCenter Inventory Organization
+
+The environment is organized into vCenter datacenters and clusters to separate the primary infrastructure from laboratory/test workloads.
+
+The current inventory includes:
+
+- `DellTower Main Datacenter`
+- `HP LAB TestDatacenter`
+- `HP Cluster`
+- `Dell Cluster`
+
+The exact placement of hosts and workloads can change as the lab is used for testing, migration, and infrastructure experiments.
+
+---
+
+## 🖥️ Virtual Machines
+
+The currently visible vSphere inventory contains a mixture of infrastructure, application, networking, and test workloads.
+
+### Infrastructure / Management
+
+- `KLMVCENTER01`
+
+### Application and Infrastructure Workloads
+
+- `KLM-SQL01`
+- `KLM-FW01`
+- `KLM-KempLB01`
+- `KLM-NETAPP`
+- `KLM-RDS01`
+- `KLM-WEB01`
+- `KLM-WEB02`
+
+### Laboratory / Test Workloads
+
+- `TesttinycorePure`
+- `KLM-CITRIX`
+- `Linux-TinyCore1`
+
+Several of these virtual machines are currently powered off or associated with hosts that are not responding.
+
+The powered-off systems are intentionally retained as part of the laboratory environment and are not considered critical production workloads.
+
+---
+
+## 🌐 VMware Networking
+
+The ESXi environment currently uses standard vSphere virtual switches.
+
+### KLMESX01
+
+- `vSwitch0`
+  - Management Network
+  - VM Network
+  - `vmnic0` uplink
+
+- `vSwitch1`
+  - Private Lab Switch-LAN
+  - No physical uplink currently configured
+
+- `vSwitch-vMotion`
+  - VMkernel-vMotion
+  - `vmnic1` uplink
+
+### KLMESX02
+
+- `vSwitch0`
+  - Management Network
+  - VM Network
+  - `vmnic0` uplink
+
+- `vSwitch1`
+  - Private Lab Switch-LAN
+
+The environment currently uses untagged VLAN configuration for the documented port groups.
+
+The **Private Lab Switch-LAN** is used to provide an isolated virtual networking environment for laboratory workloads.
+
+---
+
+## 💾 VMware Storage
+
+The environment uses VMFS datastores backed by a combination of shared and local storage.
+
+Current datastores include:
+
+- `CLOUD_ISCSI_ESX_DATASTORE01`
+- `CLOUD_ISCSI_ESX_DATASTORE02`
+- `CLOUD_ISCSI_ESX_DATASTORE03`
+- `datastore1`
+- `ESX03_DATAST1_LOCAL`
+- `PHYSICAL580GBonESX02`
+- `Virtual Datastore (1) 140`
+
+The environment includes shared iSCSI storage as part of the laboratory storage architecture.
+
+Datastore utilization is monitored through vCenter and is intentionally maintained with significant free capacity for testing, migration, and disaster-recovery exercises.
+
+---
+
+## 🔄 vMotion, DRS & CPU Compatibility
+
+The environment is designed to support experimentation with:
+
+- vMotion
+- DRS
+- Host maintenance
+- VM migration
+- Hardware compatibility
+- Disaster recovery scenarios
+
+### EVC
+
+**Enhanced vMotion Compatibility (EVC) is not currently enabled.**
+
+Because the lab contains hosts with different hardware generations, EVC remains a potential future configuration rather than an active feature.
+
+EVC could be considered if the environment begins relying more heavily on live VM migration between heterogeneous CPU platforms.
+
+See:
+
+`DRS and EVC Considerations`
+
+for additional documentation.
 
 ---
 
 ## 🛎️ Monitoring & Alerting
 
-- KLM-MONITOR01 linux vm with Uptime Kuma monitoring tool to alert on ping loss and host status
-- Future custom **PowerShell scripts** monitor VM power states
-- If a VM is **down or unresponsive**, a script triggers:
-  - An alert via **SMTP email**
+`KLM-MONITOR01` provides infrastructure monitoring using **Uptime Kuma**.
+
+The monitoring system is intended to provide visibility into:
+
+- Host availability
+- Network reachability
+- Infrastructure service availability
+- VM/service outages
+
+Additional automation can be implemented using PowerShell and VMware PowerCLI.
+
+Potential future monitoring includes:
+
+- VM power-state monitoring
+- ESXi host connectivity
+- Datastore capacity
+- vCenter service health
+- VM availability
+- Automated SMTP alerting
+
+Monitoring and alerting are treated as part of the broader infrastructure automation and observability design.
+
+---
+
+## 🔐 Security & Infrastructure Management
+
+The environment combines multiple security and management technologies, including:
+
+- Active Directory
+- DNS
+- VMware vCenter
+- ESXi
+- Microsoft Defender
+- Bitdefender
+- Network security appliances
+- Infrastructure monitoring
+- Centralized VMware management accounts
+
+Sensitive information such as:
+
+- IP addresses
+- MAC addresses
+- passwords
+- authentication tokens
+- certificates/private keys
+- infrastructure secrets
+
+is intentionally excluded from this public documentation.
 
 ---
 
 ## 💡 Why This Project?
 
-To simulate a **production-grade private cloud lab**, replicating enterprise-level systems for:
+The project is designed to simulate a **production-style private cloud and enterprise infrastructure environment** while remaining suitable for laboratory experimentation.
 
-- Design and building of Enterprise cloud environment
-- Disaster recovery testing  
-- Infrastructure automation  
-- Host patching and upgrade paths  
-- AD-integrated VMware infrastructure  
-- Hands-on experience with core IT systems
+The primary objectives include:
+
+- Designing and building an enterprise-style virtualization environment
+- Managing VMware vCenter and ESXi infrastructure
+- Working with Active Directory-integrated infrastructure
+- Testing shared storage and VM mobility
+- Practicing disaster recovery procedures
+- Experimenting with DRS and vMotion
+- Testing host patching and upgrade procedures
+- Developing infrastructure monitoring and alerting
+- Automating infrastructure tasks with PowerShell and PowerCLI
+- Learning enterprise networking and storage concepts
+- Maintaining technical documentation and repeatable procedures
+
+The environment is intentionally allowed to evolve as new technologies, hardware, and experiments are introduced.
 
 ---
 
-## 📝 Status
+## 📝 Current Status
 
-✅ Fully functional & documented  
-🔄 Upcoming Plans:
-- Deploy Linux and Windows workload VMs for AAG clusters to mirror databases
+### Core Infrastructure
+
+✅ vCenter Server operational  
+✅ KLMESX01 connected  
+✅ KLMESX02 connected  
+✅ VMware PowerCLI available for infrastructure inventory and automation  
+✅ Shared VMFS/iSCSI storage available  
+✅ VMware networking configured  
+✅ Infrastructure inventory documented  
+
+### Laboratory Infrastructure
+
+🟡 KLMESX03 currently not responding  
+🟡 KLMESX04 currently not responding  
+🟡 Several laboratory VMs powered off  
+🟡 Additional monitoring and automation under development  
+
+The unavailable hosts and powered-off test workloads are **not considered critical to the current lab operation**.
 
 ---
+
+## 🔮 Future Plans
+
+Planned or potential future work includes:
+
+- Deploy additional Linux and Windows workload VMs
+- Build database availability scenarios using SQL Server
+- Expand disaster-recovery testing
+- Develop PowerShell/PowerCLI infrastructure automation
+- Improve infrastructure monitoring
+- Implement automated VM and host health reporting
+- Test vMotion and DRS scenarios
+- Evaluate EVC if mixed-CPU migration requirements increase
+- Document host patching and upgrade procedures
+- Expand backup and recovery testing
+- Continue developing the environment as a practical enterprise infrastructure laboratory
