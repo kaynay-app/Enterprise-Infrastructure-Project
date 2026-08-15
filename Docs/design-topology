@@ -1,103 +1,40 @@
-+--------------------------------+
-|       VMware Workstation       |
-|        Physical Lab Host       |
-+--------------------------------+
-                |
-                |
-+---------------+----------------+
-|                                |
-|        VMware vCenter          |
-|     KLMVCENTER01 / vCenter     |
-|          Server 7.0.3          |
-|                                |
-| Centralized VMware Management  |
-+---------------+----------------+
-                |
-        +-------+-------+
-        |               |
-+-------+--------+ +----+----------+
-|    KLMESX01    | |    KLMESX02   |
-|   ESXi 7.0.3   | |   ESXi 6.5.0  |
-|   4 CPU / 12GB | |   4 CPU / 12GB|
-+-------+--------+ +------+---------+
-        |                 |
-        |                 |
-+-------+--------+ +------+---------+
-| VM Network     | | VM Network      |
-| Management     | | Management      |
-| Private Lab    | |                 |
-| vMotion        | |                 |
-+----------------+ +-----------------+
-        |                 |
-        +--------+--------+
-                 |
-       +---------+----------+
-       |                    |
-+------+-------+     +------+--------+
-|   Datastores |     |  Lab Storage  |
-|    VMFS      |     | Shared/Local  |
-+--------------+     +---------------+
-
-
-+--------------------------------+
-|        KLMESX01 VMs            |
-+--------------------------------+
-| - KLM-FW01                    |
-| - KLM-KempLB01                |
-| - KLM-NETAPP                  |
-| - KLM-RDS01                   |
-| - KLM-WEB01                   |
-| - KLM-WEB02                   |
-| - TesttinycorePure            |
-+--------------------------------+
-
-
-+--------------------------------+
-|        KLMESX02 VMs            |
-+--------------------------------+
-| - KLMVCENTER01                |
-| - KLM-SQL01                   |
-+--------------------------------+
-
-
-+--------------------------------+
-|     Additional Lab Hosts       |
-+--------------------------------+
-| KLMESX03                      |
-| - Currently offline            |
-| - Test infrastructure          |
-|                                |
-| KLMESX04                      |
-| - Currently offline            |
-| - Test infrastructure          |
-+--------------------------------+
-
-
-+--------------------------------+
-|       Network Functions        |
-+--------------------------------+
-| - Management Network           |
-| - VM Network                   |
-| - Private Lab Switch-LAN       |
-| - vMotion Network              |
-+--------------------------------+
-
-
-+--------------------------------+
-|     Security & Monitoring      |
-+--------------------------------+
-| - Nmap                         |
-|   Network discovery / scanning |
-|                                |
-| - Bitdefender                  |
-|   Endpoint protection          |
-|                                |
-| - Microsoft Defender           |
-|   Endpoint security            |
-|                                |
-| - Uptime Kuma                  |
-|   Monitoring*                  |
-+--------------------------------+
-
-* Monitoring configuration should be
-  verified against the current lab state.
++--------------------------------------------------+
+| VMware vCenter Server                             |
+| KLMVCENTER01                                     |
+| klmvcenter01.king.klm                            |
++--------------------------------------------------+
+                         |
+              +----------+----------+
+              |                     |
+              v                     v
++---------------------------+  +---------------------------+
+| DellTower Main Datacenter |  | HP LAB TestDatacenter     |
++---------------------------+  +---------------------------+
+              |                     |
+              v                     v
+      +---------------+      +----------------+
+      | HP Cluster    |      | Dell Cluster   |
+      +---------------+      +----------------+
+              |                     |
+              v                     v
+      +---------------+      +----------------+
+      | KLMESX02      |      | KLMESX01       |
+      | ESXi 6.5.0    |      | ESXi 7.0.3     |
+      +---------------+      +----------------+
+              |                     |
+              |             +-------+-------+-------+
+              |             |       |       |       |
+              |             v       v       v       v
+              |          KLM-FW01  KLM-   KLM-   KLM-
+              |                    KempLB01 NETAPP RDS01
+              |                            |
+              |                       +----+----+----+
+              |                       |         |    |
+              |                       v         v    v
+              |                    KLM-WEB01 KLM-WEB02
+              |                             
+              |                    TesttinycorePure
+              |
+              +-----------------------------+
+                                            |
+                                      KLM-SQL01
