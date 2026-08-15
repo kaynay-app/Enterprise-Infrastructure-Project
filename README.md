@@ -26,6 +26,8 @@ The lab simulates a **resilient private cloud environment** and is used to test 
 ## 🧰 Technologies Used
 
 - VMware ESXi 7.0U3s (nested in VMware Workstation)
+- Kemp Virtual Loadbalancer
+- Netapp ONTAP Simulator
 - vCenter Server Appliance (VCSA)
 - Windows Server 2016/ 2019 / 2022/ 2025
 - Win10_22H2_English_x64
